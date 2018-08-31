@@ -1,0 +1,38 @@
+//2018.8.15 //得到一个斐波那契数列
+
+import java.util.*;
+public class HelloData {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        System.out.println("请输入一个大于等于3的数字");
+        int number = in.nextInt();
+        Fibonacci.getNumber(number);
+
+    }
+
+}
+
+class Fibonacci {
+    static void getNumber(int i) {
+
+       /* int [] a = new int[i];
+        a[0] = 1;
+        a[1] = 1;*/
+        if (i >= 3){
+            int [] a = new int[i];
+            a[0] = 1;
+            a[1] = 1;
+            for (int b = 3; b <= i; b++  ) {
+                a[b - 1] = a[b - 2] + a[b - 3];
+            }
+            for ( int e: a)
+                System.out.println(e);
+        }
+        else
+
+            System.out.println("对不起你输入有误");
+
+
+    }
+
+}
