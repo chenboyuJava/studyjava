@@ -1,0 +1,81 @@
+// 初学java 2018.8.30 工厂方法一个小框架扔硬币和骰子游戏
+
+import java.util.*;
+
+interface Coin {
+    void stytle();
+    //备用
+    void one();
+    void two();
+}
+
+interface CoinFactory {
+    Coin getCoin();
+}
+
+class CoinOne implements Coin {
+    private  Random rand = new Random();
+    private int maybe = rand.nextInt(100);
+    public void stytle() {
+        if (maybe <= 49) { System.out.println("硬币游戏： 正面！");}
+        else { System.out.println("硬币游戏：  反面！");}
+    }
+    public void one() { }
+    public void two() { }
+}
+
+class CoinOneFactory implements CoinFactory {
+    public Coin getCoin() {
+        return new CoinOne();
+    }
+}
+
+class CoinTwo implements Coin {
+    private Random rand = new Random();
+    private int maybe = rand.nextInt(6);
+    public void stytle() {
+        switch(maybe) {
+            case 0: System.out.println("骰子数字 = " + (maybe + 1)); break;
+            case 1: System.out.println("骰子数字 = " + (maybe + 1)); break;
+            case 2: System.out.println("骰子数字 = " + (maybe + 1)); break;
+            case 3: System.out.println("骰子数字 = " + (maybe + 1)); break;
+            case 4: System.out.println("骰子数字 = " + (maybe + 1)); break;
+            case 5: System.out.println("骰子数字 + " + (maybe + 1)); break;
+        }
+    }
+    public void one() { }
+    public void two() { }
+}
+
+class CoinTwoFactory implements CoinFactory{
+    public Coin getCoin() {
+        return new CoinTwo();
+    }
+}
+
+public class FactoryTest {
+    public static void f1(CoinFactory x) {
+        Coin s = x.getCoin();
+        s.stytle();
+    }
+
+    public static void main(String[] args) {
+        System.out.println("请问你想选择哪种游戏:" );
+        System.out.println("                    扔骰子请输入 1");
+        System.out.println("                    扔硬币请输入 2");
+        while(true) {
+            Scanner in = new Scanner(System.in);
+            int number = in.nextInt();
+            switch (number) {
+                case 1:
+                    f1(new CoinOneFactory());
+                    break;
+                case 2:
+                    f1(new CoinTwoFactory());
+                    break;
+                default:
+                    System.out.println("输入错误！ 请再次输入。");
+            }
+        }
+    }
+}
